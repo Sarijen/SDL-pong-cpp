@@ -37,7 +37,6 @@ void Game::HandleInput(SDL_Event& event) {
 }
 
 void Game::Update() {
-    renderer.ClearScreen();
 
     ComputerMovement();
 
@@ -85,12 +84,12 @@ void Game::BallHitsPlayer(int probability, int changeDirectionChance) {
 
 void Game::BallOutOfScreen() {
     if (ballX + 20 > renderer.SCREEN_WIDTH) {
-        // Reset the ball values when it leaves on the RIGHT side
+        // Reset the ball values when it hits the RIGHT side
         ballSpeedX = -2;
         ballSpeedY = -2;
         playerScore += 1;
     } else if (ballX <= 0) {
-        // Reset the ball values when it leaves on the LEFT side
+        // Reset the ball values when it hits on the LEFT side
         ballSpeedX = 2;
         ballSpeedY = 2;
         computerScore += 1;
@@ -122,11 +121,14 @@ void Game::ComputerMovement() {
 }
 
 void Game::RenderGameObjects() {
+    renderer.ClearScreen();
+
     // Draw squares in the middle of the screen
     for (int i = 0; i < 20; i++) {
         renderer.RenderRect((renderer.SCREEN_WIDTH/2)-10, i*40, 20, 20, 255, 255, 255);
     }
 
+    // Score text
     renderer.RenderText(std::to_string(playerScore), 247, 70);
     renderer.RenderText(std::to_string(computerScore), 797, 70);
 

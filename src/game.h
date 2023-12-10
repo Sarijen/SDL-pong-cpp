@@ -20,7 +20,7 @@ private:
     void BallHitsWall();
     void BallOutOfScreen();
     void ComputerMovement();
-    int changeDirectionChance;
+
     int paddleHeight;
     int paddleWidth;
 
